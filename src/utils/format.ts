@@ -5,7 +5,7 @@ export function formatPrice(price: number): string {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-  }).format(price);
+  }).format(price)
 }
 
 /**
@@ -16,7 +16,8 @@ export function formatDate(dateString: string): string {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-  }).format(new Date(dateString));
+    timeZone: 'UTC',
+  }).format(new Date(dateString))
 }
 
 /**
@@ -31,42 +32,42 @@ export function generateSlug(text: string): string {
     .replace(/\s+/g, '-') // Substitui espaços por hífens
     .replace(/-+/g, '-') // Remove hífens duplicados
     .replace(/^-+|-+$/g, '') // Remove hífens do início e fim
-    .trim();
+    .trim()
 }
 
 /**
  * Trunca um texto para um número máximo de caracteres
  */
 export function truncateText(
-  text: string, 
-  maxLength: number = 100, 
+  text: string,
+  maxLength: number = 100,
   suffix: string = '...'
 ): string {
-  if (text.length <= maxLength) return text;
-  
+  if (text.length <= maxLength) return text
+
   // Special case: if maxLength is very small and we have suffix
   if (suffix !== '' && maxLength < suffix.length) {
-    return text.slice(0, maxLength) + suffix;
+    return text.slice(0, maxLength) + suffix
   }
-  
+
   // If no suffix, just truncate
   if (suffix === '') {
-    return text.slice(0, maxLength).trim();
+    return text.slice(0, maxLength).trim()
   }
-  
+
   // Calculate available space for text content
-  const availableLength = maxLength - suffix.length;
-  let truncated = text.slice(0, availableLength);
-  
+  const availableLength = maxLength - suffix.length
+  let truncated = text.slice(0, availableLength)
+
   // Try to respect word boundaries when possible
-  const lastSpaceIndex = truncated.lastIndexOf(' ');
+  const lastSpaceIndex = truncated.lastIndexOf(' ')
   if (lastSpaceIndex > 0 && availableLength > 10) {
     // Only break at word boundary if we're not losing too much text
-    const lostChars = availableLength - lastSpaceIndex;
+    const lostChars = availableLength - lastSpaceIndex
     if (lostChars <= Math.max(3, availableLength * 0.3)) {
-      truncated = truncated.slice(0, lastSpaceIndex);
+      truncated = truncated.slice(0, lastSpaceIndex)
     }
   }
-  
-  return truncated.trim() + suffix;
+
+  return truncated.trim() + suffix
 }
