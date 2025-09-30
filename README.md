@@ -1,4 +1,4 @@
-# PDP System - Frontend (Next.js)
+# PDP System - Frontend (Next.js) [![codecov](https://codecov.io/gh/deltemp/case-pdp/graph/badge.svg)](https://codecov.io/gh/deltemp/case-pdp)
 
 Sistema de Página de Detalhes do Produto (PDP) desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
